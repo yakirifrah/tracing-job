@@ -3,14 +3,18 @@ import { CardContainer, CardEditor, Container } from './style';
 import { Draggable } from 'react-beautiful-dnd';
 import { CloseOutlined, EditOutlined } from '@ant-design/icons';
 
-const Card = ({ task, index, colId }) => {
+const Card = ({ task, index, editCard }) => {
   const ref = useRef();
   const [showEdit, setShownEdit] = useState(false);
   const [textAreaVal, setTextAreaValue] = useState('');
   const handleChange = (event) => setTextAreaValue(event.target.value);
-  const handleEditCard = () => {
-    console.log(colId);
-    console.log(task.content);
+  const handleEditCard = (event) => {
+    if (ref.current.value !== textAreaVal !== '') {
+      const newVal = textAreaVal;
+      editCard({ task, newVal });
+      setShownEdit(false);
+
+    }
   };
   const handleFocus = (event) => event.target.select();
   useEffect(() => {

@@ -8,7 +8,11 @@ export default class AppStore {
   /**
    structure of initialData:
    initialData = {
-         tasks: {},
+         tasks: {
+         'task-id-1':{id:'task-id-1',content:'some text'},
+         'task-id-2':{id:'task-id-2',content:'some text'},
+         'task-id-3':{id:'task-id-3',content:'some text'}
+         },
          columns: {
         'column-1': { id: 'column-1', title: 'Wish list', tasksId: [] },
         'column-2': { id: 'column-2', title: 'In progress', tasksId: [] },
@@ -23,6 +27,23 @@ export default class AppStore {
 
   state = 'pending';
 
+  editCard(task, newVal) {
+    const { id } = task;
+    this.initialData.tasks[id].content = newVal;
+    this.updateContentInFirebase(id, newVal).catch(err => {
+      console.log(err);
+    });
+
+  }
+
+  async updateContentInFirebase(id, newVal) {
+    const { uid } = await app.auth().currentUser;
+    let rootRef = await db.collection('accounts').doc(uid);
+    rootRef.update({
+      [`data.tasks.${id}.content`]: newVal,
+
+    });
+  }
 
   async getDataByUid() {
     this.initialData = {};
@@ -118,6 +139,7 @@ decorate(AppStore, {
   state: observable,
   getDataByUid: action,
   addCardToList: action,
+  editCard: action,
   addCardToListInFirebase: action,
   updateColumnsTask: action,
   updateColumnsTaskInFirebase: action,
