@@ -1,0 +1,1 @@
+export { createRootStore } from './rootStore';

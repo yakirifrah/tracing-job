@@ -1,0 +1,26 @@
+.ant-dropdown {
+  left: 84.9vw !important;
+  top: 3.59vw !important;
+  min-width: 15vw !important;
+}
+
+.profile-item {
+  .name {
+    margin: 11px;
+    font-weight: bolder;
+  }
+
+  .name__before {
+    font-weight: lighter;
+  }
+}
+
+.ant-dropdown-menu-item {
+  &:first-child {
+    &:hover {
+      cursor: auto !important;
+      background: transparent;
+    }
+  }
+
+}

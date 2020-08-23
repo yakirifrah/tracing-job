@@ -1,0 +1,26 @@
+
+.nav-bar {
+  position: fixed;
+  top: 0;
+  height: 3.5rem;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .08), 0 4px 12px rgba(0, 0, 0, .08);
+  z-index: 1010;
+
+  .menu-item {
+    display: flex;
+    position: relative;
+    top: 18%;
+    padding: 0 1.6rem;
+    justify-content: flex-end;
+
+    .profile-wrapper {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+

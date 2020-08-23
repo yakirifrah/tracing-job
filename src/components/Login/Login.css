@@ -1,0 +1,34 @@
+#components-form-demo-normal-login .login-form {
+    max-width: 300px;
+}
+
+#components-form-demo-normal-login .login-form-forgot {
+    float: right;
+}
+
+#components-form-demo-normal-login .ant-col-rtl .login-form-forgot {
+    float: left;
+}
+
+#components-form-demo-normal-login .login-form-button {
+    width: 100%;
+}
+
+.firebaseui-idp-text {
+    vertical-align: middle;
+    font-size: 11px !important;
+
+}
+
+.firebaseui-idp-list > .firebaseui-list-item {
+    margin-bottom: 11px !important;
+}
+
+.firebaseui-idp-button {
+    min-height: 33px !important;
+}
+
+.login-social {
+    border: 1px solid;
+    padding: 20px 20px;
+}
