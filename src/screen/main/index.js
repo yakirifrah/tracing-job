@@ -101,7 +101,6 @@ const Main = () => {
             </DragDropContext>
           </Container>
         )}
-
       </>
   ));
 };

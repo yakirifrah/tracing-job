@@ -33,7 +33,7 @@ export const Title = styled.h3`
 `;
 export const TaskList = styled.div`
   padding: 8px;
-  background-color: ${props => (props.isDraggingOver ? 'skyblue' : '#EBECF0')};
+  background-color: ${props => (props.isDraggingOver ? `rgba(189, 195, 199, 1.0)` : '#EBECF0')};
   flex-grow: 1;
   min-height: 100px;
 `;

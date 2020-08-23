@@ -23,7 +23,7 @@ const AddCard = ({ handleCancelClick, id, addCardToList }) => {
   };
 
   return (
-    <Form name="nest-messages" form={form} onFinish={onFinish} validateMessages={validateMessages}
+    <Form id={`id-${id}`} name="nest-messages" form={form} onFinish={onFinish} validateMessages={validateMessages}
           size={'small'}>
       <Form.Item
         name={['content']}
@@ -33,7 +33,8 @@ const AddCard = ({ handleCancelClick, id, addCardToList }) => {
           },
         ]}
       >
-        <textarea className='list-card-text-area' placeholder='Add content for this card ...'/>
+        <textarea id={id} className='list-card-text-area' placeholder='Add content for this card ...'
+                  spellCheck={false}/>
       </Form.Item>
       <Form.Item>
         <Button type="primary" htmlType="submit">

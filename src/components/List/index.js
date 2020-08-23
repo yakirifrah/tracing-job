@@ -54,13 +54,14 @@ const List = ({ column, tasks }) => {
             ref={provided.innerRef}
             isDraggingOver={snapshot.isDraggingOver}
           >
-            {tasks.map((task, index) => <Card key={task.id} task={task} index={index}/>)}
+            {tasks.map((task, index) => <Card key={task.id} task={task} index={index} colId={column.id}/>)}
             {provided.placeholder}
             <div className={`card-composer-container ${hiddenAddCard}`} onClick={displayAddCard}>
               <span className="add-card"><PlusOutlined style={{ paddingRight: '7px' }}/>Add a card</span>
             </div>
             <div className={`add-card-form-wrapper ${isShowCardForm}`}>
-              <AddCard handleCancelClick={handleCancelClick} id={column.id} addCardToList={addCardToList}/>
+              <AddCard index={column.id} handleCancelClick={handleCancelClick} id={column.id}
+                       addCardToList={addCardToList}/>
             </div>
           </TaskList>
         )}
