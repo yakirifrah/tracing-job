@@ -3,12 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^4.2.2",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "antd": "^4.5.4",
+    "firebase": "^7.17.2",
+    "flatted": "^3.0.4",
+    "mobx": "^5.15.5",
+    "mobx-react": "^6.2.5",
+    "nanoid": "^3.1.12",
+    "node-sass": "^4.14.1",
     "react": "^16.13.1",
+    "react-beautiful-dnd": "^13.0.0",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.3"
+    "react-firebaseui": "^4.1.0",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.3",
+    "styled-components": "^5.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -30,5 +43,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-config-airbnb": "18.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "2.21.2",
+    "eslint-plugin-jsx-a11y": "6.3.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-react": "7.20.0",
+    "eslint-plugin-react-hooks": "4.0.0"
   }
 }
