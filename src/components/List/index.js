@@ -44,10 +44,11 @@ const List = ({ column, tasks }) => {
   };
 
   const editCard = ({ task, newVal }) => {
-    console.log(task);
-    console.log(newVal);
     appStore.editCard(task, newVal);
+  };
 
+  const deleteCard = (taskId, colId) => {
+    appStore.delCard(taskId, colId);
   };
 
   return useObserver(() => (
@@ -60,8 +61,8 @@ const List = ({ column, tasks }) => {
             ref={provided.innerRef}
             isDraggingOver={snapshot.isDraggingOver}
           >
-            {tasks.map((task, index) => <Card key={task.id} task={task} index={index}
-                                              editCard={editCard}/>)}
+            {tasks.map((task, index) => <Card key={task.id} task={task} index={index} colId={column.id}
+                                              editCard={editCard} deleteCard={deleteCard}/>)}
             {provided.placeholder}
             <div className={`card-composer-container ${hiddenAddCard}`} onClick={displayAddCard}>
               <span className="add-card"><PlusOutlined style={{ paddingRight: '7px' }}/>Add a card</span>

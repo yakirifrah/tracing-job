@@ -11,7 +11,6 @@ const AddCard = ({ handleCancelClick, id, addCardToList }) => {
     required: '${name} is required!',
   };
   const onFinish = values => {
-    console.log({ values });
     addCardToList(id, values);
     onReset();
 

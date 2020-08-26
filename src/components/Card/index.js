@@ -3,7 +3,7 @@ import { CardContainer, CardEditor, Container } from './style';
 import { Draggable } from 'react-beautiful-dnd';
 import { CloseOutlined, EditOutlined } from '@ant-design/icons';
 
-const Card = ({ task, index, editCard }) => {
+const Card = ({ task, index, editCard, deleteCard, colId }) => {
   const ref = useRef();
   const [showEdit, setShownEdit] = useState(false);
   const [textAreaVal, setTextAreaValue] = useState('');
@@ -15,6 +15,11 @@ const Card = ({ task, index, editCard }) => {
       setShownEdit(false);
 
     }
+  };
+  const handleDeleteCard = (event) => {
+    const { id } = task;
+    deleteCard(id, colId);
+    setShownEdit(false);
   };
   const handleFocus = (event) => event.target.select();
   useEffect(() => {
@@ -47,7 +52,6 @@ const Card = ({ task, index, editCard }) => {
       <CardEditor
         showEdit={showEdit}
       >
-
         <div className='card-editor' onClick={(event) => {
           if (event.target !== event.currentTarget)
             return;
@@ -55,18 +59,17 @@ const Card = ({ task, index, editCard }) => {
         }}>
            <span className='card-editor-close-icon' onClick={(event) => setShownEdit(false)}><CloseOutlined
              style={{ fontSize: '24px' }}/></span>
-          <div className='form-editor'>
-            {showEdit && (
-              <textarea className='card-editor-text-area' value={textAreaVal} onChange={handleChange} ref={ref}
-                        spellCheck={false}/>
 
-            )}
-            <div className='btn-wrapper'>
-              <button className='btn btn-save' onClick={handleEditCard}>Save</button>
-              <button className='btn btn-delete'>Delete</button>
+          {showEdit && (
+            <div className='form-editor'>
+                  <textarea className='card-editor-text-area' value={textAreaVal} onChange={handleChange} ref={ref}
+                            spellCheck={false}/>
+              <div className='btn-wrapper'>
+                <button className='btn btn-save' onClick={handleEditCard}>Save</button>
+                <button className='btn btn-delete' onClick={handleDeleteCard}>Delete</button>
+              </div>
             </div>
-          </div>
-
+          )}
         </div>
       </CardEditor>
     </CardContainer>

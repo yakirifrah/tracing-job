@@ -2,6 +2,7 @@ import { nanoid } from 'nanoid';
 import { action, decorate, observable, runInAction } from 'mobx';
 import { app, db } from '../Firebase/firebase';
 import 'mobx-react/batchingForReactDom';
+import * as firebase from 'firebase';
 
 export default class AppStore {
 
@@ -14,7 +15,7 @@ export default class AppStore {
          'task-id-3':{id:'task-id-3',content:'some text'}
          },
          columns: {
-        'column-1': { id: 'column-1', title: 'Wish list', tasksId: [] },
+        'column-1': { id: 'column-1', title: 'Wish list', tasksId: ['task-id-1, task-id-2, task-id-3'] },
         'column-2': { id: 'column-2', title: 'In progress', tasksId: [] },
         'column-3': { id: 'column-3', title: 'Done', tasksId: [] },
 
@@ -30,13 +31,22 @@ export default class AppStore {
   editCard(task, newVal) {
     const { id } = task;
     this.initialData.tasks[id].content = newVal;
-    this.updateContentInFirebase(id, newVal).catch(err => {
+    this.updateContentInCardFirebase(id, newVal).catch(err => {
       console.log(err);
     });
-
   }
 
-  async updateContentInFirebase(id, newVal) {
+  delCard(taskId, colId) {
+    delete this.initialData.tasks[taskId];
+    const index = this.initialData.columns[colId].tasksId.indexOf(taskId);
+    delete this.initialData.columns[colId].tasksId[index];
+    this.delCardInFirebase(taskId, colId).catch(err => {
+        console.log(err);
+      },
+    );
+  }
+
+  async updateContentInCardFirebase(id, newVal) {
     const { uid } = await app.auth().currentUser;
     let rootRef = await db.collection('accounts').doc(uid);
     rootRef.update({
@@ -106,30 +116,36 @@ export default class AppStore {
     });
   }
 
-  async addCardToListInFirebase(id) {
+  async addCardToListInFirebase() {
     const { uid } = await app.auth().currentUser;
     let rootRef = await db.collection('accounts').doc(uid);
     rootRef.update({
-      'data.tasks': { ...this.initialData.tasks },
-    }).then(() => {
-      rootRef.update({
-        [`data.columns.${id}.tasksId`]: [...this.initialData.columns[id].tasksId],
-      }).catch(e => {
-        alert(e.message());
-      });
+      'data': { ...this.initialData },
     });
   }
 
 
   async updateColumnsTaskInFirebase() {
     const { uid } = await app.auth().currentUser;
-    console.log({ uid });
     let rootRef = await db.collection('accounts').doc(uid);
     rootRef.update({
       [`data.columns`]: { ...this.initialData.columns },
     }).catch(e => {
       console.log(e.message());
     });
+  }
+
+  async delCardInFirebase(taskId, colId) {
+    const { uid } = await app.auth().currentUser;
+    let rootRef = await db.collection('accounts').doc(uid);
+    rootRef.update({
+      [`data.columns.${colId}`]: firebase.firestore.FieldValue.delete(),
+    }).then(() => {
+      rootRef.update({
+        [`data.tasks.${taskId}`]: firebase.firestore.FieldValue.delete(),
+      });
+    });
+
   }
 }
 
@@ -140,6 +156,7 @@ decorate(AppStore, {
   getDataByUid: action,
   addCardToList: action,
   editCard: action,
+  delCard: action,
   addCardToListInFirebase: action,
   updateColumnsTask: action,
   updateColumnsTaskInFirebase: action,

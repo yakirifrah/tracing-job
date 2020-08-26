@@ -90,10 +90,24 @@ export const CardEditor = styled.div`
         .btn-wrapper{
          .btn {
             padding:6px 24px;
+            color:white;
+            cursor: pointer;
+            border: none;
+            border-radius: 16px;
          
          &.btn-save {
-          margin-right:13px ;
+          margin-right:13px;
+          background-color: #61BD4F;
+            &:hover{
+            background-color: #32ff7e;
+            }
           }
+           &.btn-delete {
+          background-color: #ff3838;
+            &:hover{
+            background-color: #ff4d4d;
+            }
+           }
          }
          
         }

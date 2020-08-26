@@ -4,7 +4,6 @@ import { FirebaseContext } from '../../../Firebase';
 
 const Profile = ({ size }) => {
   const { state: { currentUser } } = useContext(FirebaseContext);
-  console.log(currentUser.photoURL);
   return (
     <>
       {currentUser.photoURL ? (
