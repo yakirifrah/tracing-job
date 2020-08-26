@@ -139,7 +139,7 @@ export default class AppStore {
     const { uid } = await app.auth().currentUser;
     let rootRef = await db.collection('accounts').doc(uid);
     rootRef.update({
-      [`data.columns.${colId}`]: firebase.firestore.FieldValue.delete(),
+      [`data.columns.${colId}.tasksId`]: firebase.firestore.FieldValue.arrayRemove(taskId),
     }).then(() => {
       rootRef.update({
         [`data.tasks.${taskId}`]: firebase.firestore.FieldValue.delete(),
