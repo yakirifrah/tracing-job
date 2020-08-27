@@ -15,9 +15,6 @@ const SignInButtonSocial = () => {
       firebase.auth.GithubAuthProvider.PROVIDER_ID,
       firebase.auth.EmailAuthProvider.PROVIDER_ID,
     ],
-    // callbacks: {
-    //   signInSuccessWithAuthResult: () => false,
-    // },
   };
   return (
     <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()}/>
