@@ -1,6 +1,7 @@
 import { Avatar } from 'antd';
 import React, { useContext } from 'react';
 import { FirebaseContext } from '../../../Firebase';
+import { showName } from '../../../helpers';
 
 const Profile = ({ size }) => {
   const { state: { currentUser } } = useContext(FirebaseContext);
@@ -9,7 +10,7 @@ const Profile = ({ size }) => {
       {currentUser.photoURL ? (
         <Avatar src={currentUser.photoURL} size={size}/>
       ) : (
-        <Avatar size={size}>{currentUser.providerData[0].displayName}</Avatar>
+        <Avatar size={size}>{showName(currentUser.providerData[0].displayName)}</Avatar>
       )}
     </>
   );

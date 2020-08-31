@@ -1,3 +1,4 @@
 import { AuthProvider, FirebaseContext } from './context';
+import { app, db } from './firebase';
 
-export { FirebaseContext, AuthProvider };
+export { FirebaseContext, AuthProvider, app, db };

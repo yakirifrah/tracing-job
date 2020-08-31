@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
 import { Dropdown, Menu } from 'antd';
 import Profile from '../Common/Avatar';
-import { FirebaseContext } from '../../Firebase';
-import { app } from '../../Firebase/firebase';
+import { app, FirebaseContext } from '../../Firebase';
 import { withRouter } from 'react-router';
 import { useHistory } from 'react-router-dom';
 

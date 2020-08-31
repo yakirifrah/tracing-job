@@ -1,0 +1,20 @@
+.container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.register {
+  border: 1px solid;
+  padding: 20px 20px;
+}
+
+.register-btn {
+  margin-top: 20px;
+}
+
+.ant-row.ant-form-item {
+  width: 300px;
+}

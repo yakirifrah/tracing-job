@@ -1,54 +1,55 @@
 import React from 'react';
-import { Button, Checkbox, Form, Input } from 'antd';
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import './Login.css';
+import { Button, Form, Input } from 'antd';
+import { LockOutlined, MailOutlined } from '@ant-design/icons';
+import { app } from '../../Firebase';
+import { Link, useHistory } from 'react-router-dom';
+import './Login.scss';
 
 const Login = () => {
-    const onFinish = values => {
-        console.log('Received values of form: ', values);
-    };
+  const history = useHistory();
+  const onFinish = async values => {
+    const { email, password } = values;
+    try {
+      await app.auth().signInWithEmailAndPassword(email, password);
+      history.push('/');
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      alert(`${errorMessage} code: ${errorCode}`);
+    }
+  };
 
-    return (
-      <Form
-        name="normal_login"
-        className="login-form"
-        initialValues={{ remember: true }}
-        onFinish={onFinish}
+  return (
+    <Form
+      name="login-form"
+      className="login-form"
+      initialValues={{ remember: true }}
+      onFinish={onFinish}
+    >
+      <Form.Item
+        name="email"
+        rules={[{ required: true, message: 'Please input your email', type: 'email' }]}
       >
-          <Form.Item
-            name="username"
-            rules={[{ required: true, message: 'Please input your Username!' }]}
-          >
-              <Input prefix={<UserOutlined className="site-form-item-icon"/>} placeholder="Username"/>
-          </Form.Item>
-          <Form.Item
-            name="password"
-            rules={[{ required: true, message: 'Please input your Password!' }]}
-          >
-              <Input
-                prefix={<LockOutlined className="site-form-item-icon"/>}
-                type="password"
-                placeholder="Password"
-              />
-          </Form.Item>
-          <Form.Item>
-              <Form.Item name="remember" valuePropName="checked" noStyle>
-                  <Checkbox>Remember me</Checkbox>
-              </Form.Item>
-
-              <a className="login-form-forgot" href="">
-                  Forgot password
-              </a>
-          </Form.Item>
-
-          <Form.Item>
-              <Button type="primary" htmlType="submit" className="login-form-button">
-                  Log in
-              </Button>
-              Or <a href="">register now!</a>
-          </Form.Item>
-      </Form>
-    );
+        <Input prefix={<MailOutlined className="site-form-item-icon"/>} placeholder="Email"/>
+      </Form.Item>
+      <Form.Item
+        name="password"
+        rules={[{ required: true, message: 'Please input your Password!', min: 6 }]}
+      >
+        <Input
+          prefix={<LockOutlined className="site-form-item-icon"/>}
+          type="password"
+          placeholder="Password"
+        />
+      </Form.Item>
+      <Form.Item>
+        <Button type="primary" htmlType="submit" className="login-form-button">
+          Log in
+        </Button>
+        Or <Link to='/Register'>register now!</Link>
+      </Form.Item>
+    </Form>
+  );
 };
 
 export default Login;

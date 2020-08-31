@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 import { action, decorate, observable, runInAction } from 'mobx';
-import { app, db } from '../Firebase/firebase';
+import { app, db } from '../Firebase';
 import 'mobx-react/batchingForReactDom';
 import * as firebase from 'firebase';
 
