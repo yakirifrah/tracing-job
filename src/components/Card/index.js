@@ -21,7 +21,6 @@ const Card = ({ task, index, editCard, deleteCard, colId }) => {
     deleteCard(id, colId);
     setShownEdit(false);
   };
-  const handleFocus = (event) => event.target.select();
   useEffect(() => {
     if (showEdit) {
       ref.current.select();
