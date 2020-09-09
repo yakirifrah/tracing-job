@@ -29,7 +29,6 @@ export const Container = styled.div`
 `;
 export const Title = styled.h3`
   padding: 8px;
-
 `;
 export const TaskList = styled.div`
   padding: 8px;
